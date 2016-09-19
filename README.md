@@ -1,2 +1,2 @@
-# ttucs5331
-visualization project
+# cs5331
+Special Problems in Computer Science: Visualization and Visual Analytics

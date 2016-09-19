@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="hari_app">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Sreehari Inukollu">
+    <title>Hari Inukollu</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Theme CSS -->
+    <link href="css/app.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body id="page-top" class="index" ng-controller="hariMainCtrl as main">
+    <!-- Navigation -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#page-top">Hari</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#search">Search</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#d3graph">D3 Graph</a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <!-- Portfolio Grid Section -->
+    <section id="Search">
+        <div class="container">
+            <div class="row mainbox">
+                <form id="search-result" class="form-horizontal" role="form">
+              <div class="panel panel-primary" >
+                      <div class="panel-heading">
+                          <div class="panel-title">Search</div>
+                      </div>
+                      <div class="panel-body" >
+
+                              <div class="form-group">
+                                <label for="year" class="col-sm-2 control-label">Un/Employment </label>
+                                <div class="col-sm-10">
+                                  <select class="form-control" name="seasonal" data-ng-model="main.userSelection.measureCode" data-ng-options="key as val for (key,val) in main.inputMeasureCode">
+                                      <option value=""> Select Measure Code </option>
+                                  </select>
+                                </div>
+                              </div>
+
+                                <div class="form-group">
+                                  <label for="year" class="col-sm-2 control-label">Seasonal</label>
+                                  <div class="col-sm-10">
+                                    <select class="form-control" name="seasonal" data-ng-model="main.userSelection.seasonalCode" data-ng-options="key as val for (key,val) in main.inputSeasonalCode">
+                                        <option value=""> Select Seasonally </option>
+                                    </select>
+                                  </div>
+                                </div>
+
+                               <div class="form-group">
+                                 <label for="year" class="col-sm-2 control-label">Year</label>
+                                 <div class="col-sm-10">
+                                   <select class="form-control" name="year" data-ng-model="main.userSelection.year" data-ng-options="key as val for (key,val) in main.inputYear">
+                                       <option value=""> All Years </option>
+                                   </select>
+                                 </div>
+                               </div>
+
+                               <div class="form-group">
+                                 <label for="month" class="col-sm-2 control-label">Month</label>
+                                 <div class="col-sm-10">
+                                   <select class="form-control" name="month" data-ng-model="main.userSelection.period" data-ng-options="key as val for (key,val) in main.inputMonth">
+                                       <option value=""> All Month </option>
+                                   </select>
+                                 </div>
+                               </div>
+
+                               <div class="form-group">
+                                 <label for="month" class="col-sm-2 control-label">State</label>
+                                 <div class="col-sm-10">
+                                   <select class="form-control" name="month" data-ng-model="main.userSelection.stateCode" data-ng-options="state.id as state.name for state in main.inputState">
+                                       <option value=""> All States </option>
+                                   </select>
+                                 </div>
+                               </div>
+
+
+
+
+
+                      </div>
+                      <div class="panel-footer">
+                        <div class="form-group">
+                          <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" class="btn btn-default" data-ng-click="main.getJson()">JSON</button>
+                          </div>
+                        </div>
+                      </div>
+
+                      </div>
+                    </form>
+            </div>
+            <div class="row ">
+                <form id="search-result" class="form-horizontal" role="form">
+              <div class="panel panel-primary" >
+                      <div class="panel-heading">
+                          <div class="panel-title">Result [ JSON Object ]</div>
+                      </div>
+                      <div class="panel-body">
+                          <code>
+                            {{main.returnData}}
+                          </code>
+                      </div>
+
+                      <div class="panel-footer">
+                        <div class="form-group">
+                          <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" class="btn btn-default" data-ng-disabled="!main.returnData" data-ng-click="drawGraph()">Draw</button>
+                          </div>
+                        </div>
+                      </div>
+
+                      </div>
+                    </form>
+
+            </div>
+            <div class="row ">
+              <div class="panel panel-primary" >
+                      <div class="panel-heading">
+                          <div class="panel-title">D3 Graph</div>
+                      </div>
+                      <div class="panel-body">
+                          <div linear-chart></div>
+                      </div>
+                      </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+
+        <div class="footer-above">
+            <div class="container">
+
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; isreehari 2016
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+    <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/pace/pace.min.js" data-pace-options='{ "ajax": true }'></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/angular/angular.min.js"></script>
+    <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/freelancer.min.js"></script>
+
+    <script src="vendor/d3/d3.v3.min.js"></script>
+
+    <script src="js/angular/app.js"></script>
+    <script src="js/angular/controller.js"></script>
+    <script src="js/angular/service.js"></script>
+    <script src="js/angular/directive.js"></script>
+
+
+
+</body>
+</html>
